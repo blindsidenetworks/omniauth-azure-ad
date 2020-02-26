@@ -90,7 +90,7 @@ module OmniAuth
 
         email = token["mail"] || token["userPrincipalName"]
 
-        unless options.hd.split(',').include?(email.split("@")[1])
+        unless options.hd.split(',').any?{ |hd| hd.casecmp(email.split("@")[1])==0 }
           raise CallbackError.new(:invalid_hd, 'Invalid Hosted Domain')
         end
 
